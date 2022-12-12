@@ -145,6 +145,7 @@ public class FrameTruck extends javax.swing.JFrame {
     private void CanvasTruckComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_CanvasTruckComponentResized
         if (_truck == null)
             return;
+        
         _truck.changeBorders(CanvasTruck.getWidth(), CanvasTruck.getHeight());
         draw();
     }//GEN-LAST:event_CanvasTruckComponentResized
@@ -169,8 +170,8 @@ public class FrameTruck extends javax.swing.JFrame {
     private void ButtonMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMoveActionPerformed
         if (_truck == null)
             return;
-        switch (((JButton)evt.getSource()).getName())
-        {
+        
+        switch (((JButton)evt.getSource()).getName()) {
             case "ButtonUp":
             _truck.moveTransport(Direction.Up);
             break;
