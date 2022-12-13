@@ -7,7 +7,6 @@ public class EntityTruck {
     private int speed;
     private float weight;
     private Color bodyColor;
-    public int r = 9;
     
     public int getSpeed() { return speed; }
     public float getWeight() { return weight; }

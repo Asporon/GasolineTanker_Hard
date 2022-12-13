@@ -33,10 +33,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="ButtonCreate" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="ButtonCreateModif" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="ComboBoxWheels" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="ComboBoxDisk" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="516" max="32767" attributes="0"/>
+              <EmptySpace pref="297" max="32767" attributes="0"/>
+              <Component id="ButtonSelectTruck" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="ButtonLeft" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -64,6 +68,8 @@
                       <Component id="ButtonCreate" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ComboBoxWheels" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ComboBoxDisk" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButtonSelectTruck" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButtonCreateModif" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="ButtonRight" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="ButtonDown" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
@@ -198,6 +204,22 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="ButtonSelectTruck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x412;&#x44b;&#x431;&#x440;&#x430;&#x442;&#x44c;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonSelectTruckActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="ButtonCreateModif">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x41c;&#x43e;&#x434;&#x438;&#x444;&#x438;&#x446;&#x438;&#x440;&#x43e;&#x432;&#x430;&#x442;&#x44c;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonCreateModifActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
