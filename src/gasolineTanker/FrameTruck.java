@@ -6,6 +6,9 @@ import javax.swing.*;
 
 public class FrameTruck extends javax.swing.JFrame {
     private DrawningTruck _truck;
+    private DrawningTruck SelectedTruck;
+    
+    public DrawningTruck getSelectedTruck() { return SelectedTruck; }
 
     public FrameTruck() {
         initComponents();
@@ -190,11 +193,8 @@ public class FrameTruck extends javax.swing.JFrame {
 
     private void ButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateActionPerformed
         Random rnd = new Random();
-        Color bodyColor = new Color(rnd.nextInt(0, 256), rnd.nextInt(0, 256), rnd.nextInt(0, 256));
         JColorChooser ColorChooser = new JColorChooser();
-        if (dialog.ShowDialog() == DialogResult.OK) {
-            bodyColor = ColorChooser.getColor();
-        }
+        Color bodyColor = JColorChooser.showDialog(null, "Выберите цвет грузовика", Color.WHITE);
         
         _truck = new DrawningTruck(rnd.nextInt(100, 300), rnd.nextInt(1000, 2000),
             bodyColor, ComboBoxWheels.getSelectedIndex() + 2, ComboBoxDisk.getSelectedIndex());
@@ -225,11 +225,22 @@ public class FrameTruck extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonMoveActionPerformed
 
     private void ButtonCreateModifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateModifActionPerformed
+        Random rnd = new Random();
+        JColorChooser ColorChooser = new JColorChooser();
+        Color bodyColor = JColorChooser.showDialog(null, "Выберите цвет грузовика", Color.WHITE);
+        Color dopColor = JColorChooser.showDialog(null, "Выберите цвет цистерны", Color.WHITE);
         
+        _truck = new DrawningGasolineTanker(rnd.nextInt(100, 300), rnd.nextInt(1000, 2000),
+            bodyColor, ComboBoxWheels.getSelectedIndex() + 2, ComboBoxDisk.getSelectedIndex(),
+            dopColor, rnd.nextBoolean(), rnd.nextBoolean());
+        CanvasTruck.setTruck(_truck);
+        setData();
+        draw();
     }//GEN-LAST:event_ButtonCreateModifActionPerformed
 
     private void ButtonSelectTruckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSelectTruckActionPerformed
-        
+        SelectedTruck = _truck;
+         dispose();
     }//GEN-LAST:event_ButtonSelectTruckActionPerformed
 
     public static void main(String args[]) {
