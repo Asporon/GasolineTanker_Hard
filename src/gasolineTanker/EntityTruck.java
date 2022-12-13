@@ -15,7 +15,7 @@ public class EntityTruck {
         return speed * 100 / weight;
     }
     
-    public void init(int speed, float weight, Color bodyColor) {
+    public EntityTruck(int speed, float weight, Color bodyColor) {
         Random rnd = new Random();
         this.speed = speed <= 0 ? rnd.nextInt(100) + 50 : speed;
         this.weight = weight <= 0 ? rnd.nextFloat(30) + 40 : weight;

@@ -2,11 +2,11 @@ package gasolineTanker;
 
 import java.awt.*;
 
-public class DrawningTrucksWheels implements IDrawningWheels{
+public class DrawningTrucksWheelsScrew implements IDrawningWheels {
     private NumberOfWheels numberOfWheels;
     private int wheels;
     
-        @Override
+    @Override
     public int getWheels() {
         return wheels;
     }
@@ -55,10 +55,23 @@ public class DrawningTrucksWheels implements IDrawningWheels{
     
         @Override
     public void drawWheel(Graphics g, float posX, float posY, Color diskColor){
-        g.setColor(Color.BLACK);
-        g.fillOval((int)posX, (int)posY, 20, 20);
+        Color blackColor = Color.BLACK;
+        
+        int x = (int) posX;
+        int y = (int) posY;
+        
+        g.setColor(blackColor);
+        g.fillOval(x, y, 20, 20);
         
         g.setColor(diskColor);
-        g.fillOval((int)posX + 4, (int)posY + 4, 12, 12);
+        g.fillOval(x + 4, y + 4, 12, 12);
+        
+        int[] xScrew = {x + 10, x + 14, x + 10, x + 6};
+        int[] yScrew = {y + 6, y + 10, y + 14, y + 10};
+        g.setColor(blackColor);
+        g.fillPolygon(xScrew, yScrew, 4);
+        g.setColor(Color.DARK_GRAY);
+        g.drawPolygon(xScrew, yScrew, 4);
     }
 }
+

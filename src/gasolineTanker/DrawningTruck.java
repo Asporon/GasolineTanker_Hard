@@ -3,24 +3,40 @@ package gasolineTanker;
 import java.awt.*;
 
 public class DrawningTruck {
-    private EntityTruck Truck;
-    private DrawningTrucksWheels Wheels;
+    protected EntityTruck Truck;
+    private IDrawningWheels Wheels;
     
-    private float _startPosX;
-    private float _startPosY;
+    protected float _startPosX;
+    protected float _startPosY;
     private Integer _pictureWidth = null;
     private Integer _pictureHeight = null;
-    private final int _truckWidth = 90;
-    private final int _truckHeight = 70;
+    private int _truckWidth = 90;
+    private int _truckHeight = 70;
     
     public EntityTruck getTruck() { return Truck; }
     
-    public void init(int speed, float weight, Color bodyColor, int wheels) {
-        Truck = new EntityTruck();
-        Truck.init(speed, weight, bodyColor);
+    public DrawningTruck(int speed, float weight, Color bodyColor, int wheels, int disk) {
+        Truck = new EntityTruck(speed, weight, bodyColor);
         
-        Wheels = new DrawningTrucksWheels();
+        switch (disk) {
+            case 0:
+                Wheels = new DrawningTrucksWheels();
+                break;
+            case 1:
+                Wheels = new DrawningTrucksWheelsScrew();
+                break;
+            case 2:
+                Wheels = new DrawningTrucksWheelsSpoke();
+                break;
+        }
         Wheels.setWheels(wheels);
+    }
+    protected DrawningTruck(int speed, float weight, Color bodyColor, int wheels,
+            int disk, int truckWidth, int truckHeight) {
+         this(speed, weight, bodyColor, wheels, disk);   
+    
+        _truckWidth = truckWidth;
+        _truckHeight = truckHeight;
     }
     
     public void setPosition(int x, int y, int width, int height) {
@@ -91,5 +107,10 @@ public class DrawningTruck {
         if (_startPosY + _truckHeight > _pictureHeight)
             _startPosY = _pictureHeight - _truckHeight;
         
+    }
+    
+    public float[] getCurrentPosition() {
+        return new float[] {_startPosX, _startPosX + _truckWidth, _startPosY,
+            _startPosY + _truckHeight};
     }
 }
