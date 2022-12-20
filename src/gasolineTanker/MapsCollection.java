@@ -38,4 +38,12 @@ public class MapsCollection {
             return null;
         }
     }
+    
+    public DrawningObjectTruck get(String map, int truck) {
+        if (_mapStorages.containsKey(map)) {
+            return _mapStorages.get(map).getSetTruck().get(truck);
+        } else {
+            return null;
+        }
+    }
 }

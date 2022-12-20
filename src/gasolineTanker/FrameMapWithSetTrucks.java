@@ -3,10 +3,11 @@ package gasolineTanker;
 import java.awt.*;
 import javax.swing.*;
 import java.util.HashMap;
-import java.util.Queue;
+import java.util.ArrayDeque;
 
 public class FrameMapWithSetTrucks extends javax.swing.JFrame {
-    private HashMap<String, AbstractMap> _mapsDict = new HashMap<String, AbstractMap>();
+    private HashMap<String, AbstractMap> _mapsDict = new HashMap<>();
+    private ArrayDeque<DrawningObjectTruck> _delTrucksQue = new ArrayDeque<>();
     private MapsCollection _mapsCollection;
     
     public FrameMapWithSetTrucks() {
@@ -155,17 +156,6 @@ public class FrameMapWithSetTrucks extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(ComboBoxSelectorMap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelToolsLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(ButtonLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelToolsLayout.createSequentialGroup()
-                        .addComponent(ButtonDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ButtonRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23))
             .addGroup(PanelToolsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +174,17 @@ public class FrameMapWithSetTrucks extends javax.swing.JFrame {
                     .addComponent(TextFieldPosition)
                     .addComponent(ButtonWorkDeleteTruck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelToolsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelToolsLayout.createSequentialGroup()
+                        .addComponent(ButtonDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ButtonRight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
         );
         PanelToolsLayout.setVerticalGroup(
             PanelToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +199,7 @@ public class FrameMapWithSetTrucks extends javax.swing.JFrame {
                 .addComponent(ScrollPaneMaps, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addComponent(ButtonDelMap)
-                .addGap(43, 43, 43)
+                .addGap(47, 47, 47)
                 .addComponent(ButtonAddTruck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TextFieldPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,11 +207,11 @@ public class FrameMapWithSetTrucks extends javax.swing.JFrame {
                 .addComponent(ButtonRemoveTruck)
                 .addGap(5, 5, 5)
                 .addComponent(ButtonWorkDeleteTruck)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(ButtonShowStorage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonShowOnMap)
-                .addGap(36, 36, 36)
+                .addGap(29, 29, 29)
                 .addComponent(ButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +322,9 @@ public class FrameMapWithSetTrucks extends javax.swing.JFrame {
         }
         
         int pos = Integer.parseInt(TextFieldPosition.getText());
-        if (_mapsCollection.get(ListMaps.getSelectedValue()).remove(pos) != null) {
+        DrawningObjectTruck delTruck = _mapsCollection.get(ListMaps.getSelectedValue()).remove(pos);
+        if (delTruck != null) {
+            _delTrucksQue.addFirst(delTruck);
             JOptionPane.showMessageDialog(null,"Объект удален");
             CanvasTruck.getGraphics().drawImage(_mapsCollection.get(ListMaps.getSelectedValue()).showSet(), 0, 0, null);
         } else {
@@ -355,7 +358,23 @@ public class FrameMapWithSetTrucks extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonDelMapActionPerformed
 
     private void ButtonWorkDeleteTruckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonWorkDeleteTruckActionPerformed
-        // TODO add your handling code here:
+        if (_delTrucksQue.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Очередь удалённых грузовиков пуста");
+            return;
+        }
+        
+        FrameTruck form = new FrameTruck(this, _delTrucksQue.pollLast());
+        form.setVisible(true);
+        DrawningTruck selectedTruck = form.getSelectedTruck();
+        if (selectedTruck != null) {
+            DrawningObjectTruck truck = new DrawningObjectTruck(selectedTruck);
+            if (_mapsCollection.get(ListMaps.getSelectedValue()).insert(truck) >= 0) {
+                JOptionPane.showMessageDialog(null,"Объект добавлен");
+                CanvasTruck.getGraphics().drawImage(_mapsCollection.get(ListMaps.getSelectedValue()).showSet(), 0, 0, null);
+            } else {
+                JOptionPane.showMessageDialog(null,"Не удалось добавить объект");
+            }
+        }
     }//GEN-LAST:event_ButtonWorkDeleteTruckActionPerformed
 
     private void ListMapsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListMapsValueChanged

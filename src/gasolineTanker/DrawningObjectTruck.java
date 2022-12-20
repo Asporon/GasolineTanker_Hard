@@ -14,6 +14,8 @@ public class DrawningObjectTruck implements IDrawningObject {
             step = 0;
     }
     
+    public DrawningTruck getDrawningTruck() { return _truck; }
+    
         @Override
     public float getStep() { return step; }
   

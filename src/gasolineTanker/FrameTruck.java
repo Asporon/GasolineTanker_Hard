@@ -14,7 +14,16 @@ public class FrameTruck extends javax.swing.JDialog {
         super(parent, "Грузовик", true);
         initComponents();
     }
-
+    public FrameTruck(JFrame parent, DrawningObjectTruck _delTruck) {
+        super(parent, "Грузовик", true);
+        initComponents();
+        
+        _truck = _delTruck.getDrawningTruck();
+        CanvasTruck.setTruck(_truck);
+        setData();
+        draw();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

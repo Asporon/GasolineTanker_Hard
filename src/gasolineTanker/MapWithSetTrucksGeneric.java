@@ -11,6 +11,8 @@ public class MapWithSetTrucksGeneric<T extends IDrawningObject, U extends Abstra
     private final SetTrucksGeneric<T> _setTrucks;
     private final U _map;
     
+    public SetTrucksGeneric<T> getSetTruck() { return _setTrucks; }
+    
     public MapWithSetTrucksGeneric(int picWidth, int picHeight, U map) {
         int width = picWidth / _placeSizeWidth;
         int height = picHeight / _placeSizeHeight;
