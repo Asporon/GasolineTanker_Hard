@@ -1,14 +1,16 @@
 package gasolineTanker;
 
+import java.util.ArrayList;
+
 public class SetTrucksGeneric<T> {
-    private final T[] _places;
-    private int count;
+    private ArrayList<T> _places;
+    private int _maxCount;
     
-    public int getCount() { return count;}
+    public int getCount() { return _places.size();}
     
     public SetTrucksGeneric(int count) {
-        _places = (T[]) new Object[count];
-        this.count = count;
+        _maxCount = count;
+        _places = new ArrayList<T>();
     }
     
     public int insert(T truck) {
@@ -16,43 +18,35 @@ public class SetTrucksGeneric<T> {
     }
     
     public int insert(T truck, int position) {
-        if (_places[position] != null)
-        {
-            boolean freeSpace = false;
-            int firstFreeElement = -1;
-            for (int i = count - 1; i >= position; i--)
-            {
-                if (_places[i] == null)
-                {
-                    freeSpace = true;
-                    firstFreeElement = i;
-                }
-            }
-            if (!freeSpace)
-                return -1;
-
-            for (int i = firstFreeElement - 1; i >= position; i--)
-            {
-                _places[i + 1] = _places[i];
-            }
-        }
-        _places[position] = truck;
-        return position;
+        if (position <= _places.size() && _places.size() < _maxCount && position >= 0) {
+            _places.add(position, truck);
+            return position;
+        } else {
+            return -1;
+        }        
     }
     
     public T remove(int position) {
-        if (_places[position] != null)
-        {
-            T result = _places[position];
-            _places[position] = null;
-            return result;
-        } else
+        if (position < _places.size() && position >= 0) {
+            var truck = _places.get(position);
+            _places.remove(position);
+            return truck;
+        } else {
             return null;
+        }
     }
     
     public T get(int position) {
-        if (_places[position] != null)
-            return _places[position];
-        else return null;
+        if (position < _places.size() && position >= 0) {
+            return _places.get(position);
+        } else {
+            return null;
+        }
+    }
+    
+    public void set(T truck, int position) {
+        if (position < _places.size() && position >= 0) {
+            _places.set(position, truck);
+        }
     }
 }
