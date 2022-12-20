@@ -20,6 +20,13 @@ public class MapWithSetTrucksGeneric<T extends IDrawningObject, U extends Abstra
         _map = map;
     }
     
+    public int insert(T truck) {
+        return _setTrucks.insert(truck);
+    }
+    public T remove(int position) {
+        return _setTrucks.remove(position);
+    }
+    
     public BufferedImage showSet() {
         BufferedImage bmp = new BufferedImage(_pictureWidth, _pictureHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = bmp.createGraphics();
@@ -79,7 +86,7 @@ public class MapWithSetTrucksGeneric<T extends IDrawningObject, U extends Abstra
         g2d.fillRect(0, 0, _pictureWidth, _pictureHeight);
 
         Color markupColor = Color.YELLOW;
-        g2d.setColor(asphaltColor);
+        g2d.setColor(markupColor);
         BasicStroke markupStroke = new BasicStroke(3);
         g2d.setStroke(markupStroke);
         

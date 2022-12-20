@@ -4,13 +4,14 @@ import java.util.Random;
 import java.awt.*;
 import javax.swing.*;
 
-public class FrameTruck extends javax.swing.JFrame {
+public class FrameTruck extends javax.swing.JDialog {
     private DrawningTruck _truck;
     private DrawningTruck SelectedTruck;
-    
+       
     public DrawningTruck getSelectedTruck() { return SelectedTruck; }
 
-    public FrameTruck() {
+    public FrameTruck(JFrame parent) {
+        super(parent, "Грузовик", true);
         initComponents();
     }
 
@@ -34,10 +35,10 @@ public class FrameTruck extends javax.swing.JFrame {
         ButtonSelectTruck = new javax.swing.JButton();
         ButtonCreateModif = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Грузовик");
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(900, 500));
+        setPreferredSize(new java.awt.Dimension(600, 400));
 
         ToolBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ToolBar.setRollover(true);
@@ -131,7 +132,7 @@ public class FrameTruck extends javax.swing.JFrame {
                 .addComponent(ComboBoxWheels, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ComboBoxDisk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButtonSelectTruck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,7 +149,7 @@ public class FrameTruck extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(CanvasTruck, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                .addComponent(CanvasTruck, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,7 +197,7 @@ public class FrameTruck extends javax.swing.JFrame {
         JColorChooser ColorChooser = new JColorChooser();
         Color bodyColor = JColorChooser.showDialog(null, "Выберите цвет грузовика", Color.WHITE);
         
-        _truck = new DrawningTruck(rnd.nextInt(100, 300), rnd.nextInt(1000, 2000),
+        _truck = new DrawningTruck(rnd.nextInt(100, 300), rnd.nextFloat(1000, 2000),
             bodyColor, ComboBoxWheels.getSelectedIndex() + 2, ComboBoxDisk.getSelectedIndex());
         CanvasTruck.setTruck(_truck);
         setData();
@@ -230,7 +231,7 @@ public class FrameTruck extends javax.swing.JFrame {
         Color bodyColor = JColorChooser.showDialog(null, "Выберите цвет грузовика", Color.WHITE);
         Color dopColor = JColorChooser.showDialog(null, "Выберите цвет цистерны", Color.WHITE);
         
-        _truck = new DrawningGasolineTanker(rnd.nextInt(100, 300), rnd.nextInt(1000, 2000),
+        _truck = new DrawningGasolineTanker(rnd.nextInt(100, 300), rnd.nextFloat(1000, 2000),
             bodyColor, ComboBoxWheels.getSelectedIndex() + 2, ComboBoxDisk.getSelectedIndex(),
             dopColor, rnd.nextBoolean(), rnd.nextBoolean());
         CanvasTruck.setTruck(_truck);
@@ -240,7 +241,7 @@ public class FrameTruck extends javax.swing.JFrame {
 
     private void ButtonSelectTruckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSelectTruckActionPerformed
         SelectedTruck = _truck;
-         dispose();
+        dispose();
     }//GEN-LAST:event_ButtonSelectTruckActionPerformed
 
     public static void main(String args[]) {
@@ -263,7 +264,7 @@ public class FrameTruck extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameMap().setVisible(true);
+                new FrameMapWithSetTrucks().setVisible(true);
             }
         });
     }

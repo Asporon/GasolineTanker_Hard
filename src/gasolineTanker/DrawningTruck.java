@@ -38,6 +38,7 @@ public class DrawningTruck {
         _truckWidth = truckWidth;
         _truckHeight = truckHeight;
     }
+
     
     public void setPosition(int x, int y, int width, int height) {
         if (x > 0 && y > 0 && width > 0 && height > 0 
